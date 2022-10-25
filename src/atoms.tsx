@@ -26,7 +26,7 @@ export const toDostate = atom<IToDoState>({
 export const IBoardState = atom<string[]>({
   key: "boards",
   default: ["To Do", "Doing", "Done"],
-  effects_UNSTABLE: [persistAtom],
+  effects: [persistAtom],
 });
 
 export const TrashCanState = atom<boolean>({
