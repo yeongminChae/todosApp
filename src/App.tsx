@@ -25,7 +25,9 @@ function App() {
   ) => {
     const { destination, source } = info;
     if (!destination) return;
+
     setTrashCan(false);
+
     if (source.droppableId === "boards") {
       setBoards((prev) => {
         const boardCopy = [...prev];
@@ -34,6 +36,7 @@ function App() {
         return boardCopy;
       });
     }
+
     if (destination.droppableId === "trashcan") {
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
@@ -41,23 +44,27 @@ function App() {
         return { ...allBoards, [source.droppableId]: boardCopy };
       });
     }
+
     if (destination?.droppableId === source.droppableId) {
       // same board movements
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
-        const taskObj = boardCopy[source.index];
-        boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination?.index, 0, taskObj);
+        const taskObj = boardCopy.splice(source.index, 1)[0];
+        // const taskObj = boardCopy[source.index];
+        // boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination.index, 0, taskObj);
         return { ...allBoards, [source.droppableId]: boardCopy };
       });
     }
+
     if (destination.droppableId !== source.droppableId) {
       // cross board movement
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
         const destinationBoard = [...allBoards[destination.droppableId]];
-        const taskObj = sourceBoard[source.index];
-        sourceBoard.splice(source.index, 1);
+        const taskObj = sourceBoard.splice(source.index, 1)[0];
+        // const taskObj = sourceBoard[source.index];
+        // sourceBoard.splice(source.index, 1);
         destinationBoard.splice(destination?.index, 0, taskObj);
         return {
           ...allBoards,
@@ -74,8 +81,8 @@ function App() {
       }
       onBeforeDragStart={onBeforeDragStart}
     >
-      <Wrapper className="flex-col bg-[#0e7490] ">
-        <div className="mb-0 flex h-44 w-full items-center justify-center">
+      <Wrapper className="relative flex-col bg-[#0e7490] ">
+        <div className="mb-0 flex h-44 w-full items-center justify-around ">
           <span className="mb-20 text-4xl text-white">Kanban Board</span>
         </div>
         <Droppable droppableId="boards" direction="horizontal" type="board">
@@ -83,9 +90,10 @@ function App() {
             <Boards
               ref={magic.innerRef}
               {...magic.droppableProps}
-              className="mb-28"
+              className="mb-28 flex w-auto items-center justify-center"
             >
               {Object.keys(toDos).map((boardId, index) => (
+                // {boards.map((boardId, index) => (
                 <Board
                   boardId={boardId}
                   key={boardId}
@@ -116,7 +124,7 @@ const Boards = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  gap: 10px;
+  gap: 30px;
 `;
 
 export default App;

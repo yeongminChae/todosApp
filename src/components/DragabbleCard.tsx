@@ -9,12 +9,7 @@ interface IDraggableCardProps {
   boardId: string;
 }
 
-function DragableCard({
-  toDoId,
-  toDoText,
-  index,
-  boardId,
-}: IDraggableCardProps) {
+function DragableCard({ toDoId, toDoText, index }: IDraggableCardProps) {
   return (
     <>
       <Draggable draggableId={toDoId + ""} index={index}>
@@ -24,7 +19,7 @@ function DragableCard({
             ref={magic.innerRef}
             {...magic.draggableProps}
             {...magic.dragHandleProps}
-            className="flex w-full justify-between"
+            className="flex w-full flex-col items-center justify-between"
           >
             {toDoText}
           </Card>

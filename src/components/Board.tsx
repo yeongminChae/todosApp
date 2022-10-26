@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ITodo, toDostate } from "../atoms";
 import { useSetRecoilState } from "recoil";
 import DragabbleCard from "./DragabbleCard";
+import { motion } from "framer-motion";
 
 export interface IBoardProps {
   toDos: ITodo[];
@@ -45,9 +46,10 @@ function Board({ toDos, boardId, index }: IBoardProps) {
           {...magic.dragHandleProps}
           {...magic.draggableProps}
           ref={magic.innerRef}
+          onSubmit={handleSubmit(onValid)}
         >
           <Title>{boardId} </Title>
-          <Form onSubmit={handleSubmit(onValid)}>
+          <Form>
             <input
               {...register("toDo", { required: true })}
               type="text"
@@ -103,7 +105,7 @@ const Title = styled.h2`
 const Area = styled.div<IAreaProps>`
   background-color: ${(props) =>
     props.isDraggingOver
-      ? "#0c4a6e"
+      ? "#57534e"
       : props.isDraggingFromThis
       ? "#475569"
       : "transparent"};
@@ -112,7 +114,7 @@ const Area = styled.div<IAreaProps>`
   padding: 20px;
 `;
 
-const Form = styled.form`
+const Form = styled(motion.form)`
   width: 100%;
   input {
     width: 100%;
