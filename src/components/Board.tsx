@@ -62,7 +62,6 @@ function Board({ toDos, boardId, index }: IBoardProps) {
               <Area
                 isDraggingOver={snapshot.isDraggingOver}
                 isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
-                // isDraggingFromThis={!!snapshot.draggingFromThisWith}
                 ref={magic.innerRef}
                 {...magic.droppableProps}
               >
@@ -72,7 +71,6 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                     index={index}
                     toDoId={toDo.id}
                     toDoText={toDo.text}
-                    // boardId={boardId}
                   />
                 ))}
                 {magic.placeholder}
@@ -87,13 +85,17 @@ function Board({ toDos, boardId, index }: IBoardProps) {
 
 const Wrapper = styled.div`
   width: 300px;
-  padding: 20px 0px;
+  padding: 10px 0px;
+  padding-bottom: 0;
   background-color: ${(props) => props.theme.boardColor};
   border-radius: 5px;
   min-height: 300px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  margin-right: 15px;
 `;
 
 const Title = styled.h2`

@@ -6,7 +6,6 @@ interface IDraggableCardProps {
   toDoId: number;
   toDoText: string;
   index: number;
-  // boardId: string;
 }
 
 function DragableCard({ toDoId, toDoText, index }: IDraggableCardProps) {
@@ -19,7 +18,7 @@ function DragableCard({ toDoId, toDoText, index }: IDraggableCardProps) {
             {...magic.dragHandleProps}
             {...magic.draggableProps}
             isDragging={snapshot.isDragging}
-            className="flex w-full flex-col items-center justify-between"
+            className="flex w-full flex-col items-center justify-between shadow-lg"
           >
             {toDoText}
           </Card>
@@ -35,6 +34,7 @@ const Card = styled.div<{ isDragging: boolean }>`
   margin-bottom: 5px;
   background-color: ${(props) =>
     props.isDragging ? "#e4f2ff" : props.theme.cardColor};
+  user-select: none;
   box-shadow: ${(props) =>
     props.isDragging ? "0px 2px 5px rgba(0,0,0,0.05) " : "none"};
 `;
