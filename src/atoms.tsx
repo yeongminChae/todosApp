@@ -25,11 +25,11 @@ export const toDostate = atom<IToDoState>({
 
 export const IBoardState = atom<string[]>({
   key: "boards",
-  default: ["To Do", "Doing", "Done"],
+  default: ["TO DO'S", "⏳", "✅"],
   effects: [persistAtom],
 });
 
 export const TrashCanState = atom<boolean>({
   key: "trashcan",
-  default: false,
+  default: true,
 });

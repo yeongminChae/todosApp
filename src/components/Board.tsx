@@ -5,6 +5,7 @@ import { ITodo, toDostate } from "../atoms";
 import { useSetRecoilState } from "recoil";
 import DragabbleCard from "./DragabbleCard";
 import { motion } from "framer-motion";
+import React from "react";
 
 export interface IBoardProps {
   toDos: ITodo[];
@@ -46,10 +47,9 @@ function Board({ toDos, boardId, index }: IBoardProps) {
           {...magic.dragHandleProps}
           {...magic.draggableProps}
           ref={magic.innerRef}
-          onSubmit={handleSubmit(onValid)}
         >
           <Title>{boardId} </Title>
-          <Form>
+          <Form onSubmit={handleSubmit(onValid)}>
             <input
               {...register("toDo", { required: true })}
               type="text"
@@ -62,6 +62,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
               <Area
                 isDraggingOver={snapshot.isDraggingOver}
                 isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
+                // isDraggingFromThis={!!snapshot.draggingFromThisWith}
                 ref={magic.innerRef}
                 {...magic.droppableProps}
               >
@@ -71,7 +72,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                     index={index}
                     toDoId={toDo.id}
                     toDoText={toDo.text}
-                    boardId={boardId}
+                    // boardId={boardId}
                   />
                 ))}
                 {magic.placeholder}
@@ -121,4 +122,4 @@ const Form = styled(motion.form)`
   }
 `;
 
-export default Board;
+export default React.memo(Board);

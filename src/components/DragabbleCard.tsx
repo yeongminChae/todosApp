@@ -6,26 +6,26 @@ interface IDraggableCardProps {
   toDoId: number;
   toDoText: string;
   index: number;
-  boardId: string;
+  // boardId: string;
 }
 
 function DragableCard({ toDoId, toDoText, index }: IDraggableCardProps) {
   return (
-    <>
-      <Draggable draggableId={toDoId + ""} index={index}>
-        {(magic, snapshot) => (
+    <Draggable draggableId={toDoId + ""} index={index}>
+      {(magic, snapshot) => {
+        return (
           <Card
-            isDragging={snapshot.isDragging}
             ref={magic.innerRef}
-            {...magic.draggableProps}
             {...magic.dragHandleProps}
+            {...magic.draggableProps}
+            isDragging={snapshot.isDragging}
             className="flex w-full flex-col items-center justify-between"
           >
             {toDoText}
           </Card>
-        )}
-      </Draggable>
-    </>
+        );
+      }}
+    </Draggable>
   );
 }
 

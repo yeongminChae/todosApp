@@ -13,7 +13,7 @@ function TrashCan() {
         <TrashCanDiv
           ref={magic.innerRef}
           {...magic.droppableProps}
-          className="flex h-10 w-full items-end justify-center"
+          className="mb-10 mr-20 flex h-10 w-full items-center justify-center"
         >
           {trashCan && (
             <div className="mt-20">
@@ -29,6 +29,7 @@ function TrashCan() {
               </motion.span>
             </div>
           )}
+          {/* {magic.placeholder} */}
         </TrashCanDiv>
       )}
     </Droppable>
@@ -36,32 +37,17 @@ function TrashCan() {
 }
 
 const rowVariants = {
-  hidden: { x: window.outerWidth + 5 },
-  visible: { x: 0, opacity: 1 },
+  hidden: { x: window.outerWidth - 5 },
+  visible: { x: 0 },
   exit: { x: -window.outerWidth - 5, opacity: 0 },
 };
 
 const TrashCanDiv = styled(motion.div)`
-  body,
-  html {
-    margin: 0px;
-    margin-top: 10px;
-    padding: 0px;
-    padding-top: 10px;
-    font-family: "Titillium Web", sans-serif;
-    font-size: 23px;
-    line-height: 42px;
-    font-weight: 100;
-    text-align: center;
-    height: 100%;
-    top: 5px;
-  }
-  section {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  width: 33px;
+  height: 40px;
 
   .trash {
     background: #ff6873;
@@ -69,6 +55,13 @@ const TrashCanDiv = styled(motion.div)`
     height: 60px;
     display: inline-block;
     margin: 0 auto;
+
+    svg {
+      position: absolute;
+      top: 13px;
+      right: 8px;
+      color: ${(props) => props.theme.boardColor};
+    }
 
     position: relative;
     -webkit-border-bottom-right-radius: 6px;
@@ -78,13 +71,6 @@ const TrashCanDiv = styled(motion.div)`
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
   }
-  .trash:after {
-    position: absolute;
-    left: -99px;
-    right: 0;
-    bottom: -25px;
-    width: 300px;
-  }
   .trash span {
     position: absolute;
     height: 12px;
@@ -92,12 +78,13 @@ const TrashCanDiv = styled(motion.div)`
     top: -19px;
     left: -10px;
     right: -10px;
-
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     transform: rotate(0deg);
     transition: transform 1000ms;
-    transform-origin: 19% 100%;
+    transform-origin: 82% 100%;
+    display: flex;
+    justify-content: center;
   }
   .trash span:after {
     content: "";
@@ -110,7 +97,7 @@ const TrashCanDiv = styled(motion.div)`
     border-top-right-radius: 10px;
     transform: rotate(0deg);
     transition: transform 500ms;
-    transform-origin: 19% 100%;
+    transform-origin: 82% 100%;
     left: 27px;
   }
 
@@ -142,8 +129,8 @@ const TrashCanDiv = styled(motion.div)`
     border-radius: 5px;
   }
 
-  .trash:hover span {
-    transform: rotate(-45deg);
+  &:hover .trash span {
+    transform: rotate(45deg);
     transition: transform 250ms;
   }
 `;
