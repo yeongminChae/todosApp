@@ -30,7 +30,7 @@ function App() {
             <Boards
               ref={magic.innerRef}
               {...magic.droppableProps}
-              className="mb-28 flex w-full items-center justify-center gap-5"
+              className="mb-28 flex w-full items-center justify-center gap-0"
             >
               {boards.map((boardId, index) => (
                 <Board
